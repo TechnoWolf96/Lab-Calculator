@@ -21,7 +21,8 @@ public:
 	bool Empty();								// Пустой ли стек
 	bool Full();								// Заполнен ли стек
 	void Push(T item);							// Добавить элемент в стек
-	T Pop();									// Извлечь последний элемент из стека
+	// Извлечь последний элемент из стека
+	T Pop();
 	T Top() { return arr[pos]; }				// Посмотреть последний элемент в стеке
 	void Clear() { pos = -1; }					// Очистить стек
 
@@ -52,6 +53,7 @@ inline TStack<T>::TStack(const TStack& other)
 template<class T>
 inline bool TStack<T>::Empty()
 {
+
 	if (pos == -1) return true;
 	else return false;
 }
@@ -68,9 +70,9 @@ inline void TStack<T>::Push(T item)
 	if (Full()) throw "Stack owerflow";
 	arr[++pos] = item;
 }
-
+// Извлечь последний элемент из стека
 template<class T>
-inline T TStack<T>::Pop()
+inline T TStack<T>::Pop() 
 {
 	if (Empty()) throw "Stack is empty";
 	T temp = arr[pos];

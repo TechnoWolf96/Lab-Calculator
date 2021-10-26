@@ -56,7 +56,7 @@ bool BracketsTask(string str) // Задача про скобки, возвра�
 
 
 
-int main()
+int _main()
 {
     setlocale(LC_ALL, "ru");
 
@@ -67,5 +67,6 @@ int main()
     
     cout << '\n';
     system("pause");
+    return 0;
 }
 
