@@ -3,11 +3,8 @@
 #include "TDStack.h"
 using namespace std;
 
-
-int main()
+void TestTDStack()
 {
-	setlocale(LC_ALL, "ru");
-
 	int arr1[5] = { 1, 2, 3, 4, 5 }; int size1 = 5;
 	int arr2[5] = { 10, 9, 8, 7, 6 }; int size2 = 5;
 	TDStack<int> dStack(10);
@@ -23,7 +20,7 @@ int main()
 	while (!dStack.Empty1())
 	{
 		int temp = dStack.Pop1();
-		cout << "\nИзвлечен элемент из 1 стека: " << temp << " ; Стек заполнен? Ответ: " 
+		cout << "\nИзвлечен элемент из 1 стека: " << temp << " ; Стек заполнен? Ответ: "
 			<< dStack.Full() << " ; Стек 1 пуст? Ответ: " << dStack.Empty1();
 	}
 	cout << "\nИзвлечены элементы из 2 стека: ";
@@ -33,7 +30,18 @@ int main()
 		cout << "\nИзвлечен элемент из 2 стека: " << temp << " ; Стек заполнен? Ответ: "
 			<< dStack.Full() << " ; Стек 2 пуст? Ответ: " << dStack.Empty2();
 	}
+}
+
+
+
+
+int __main()
+{
+	setlocale(LC_ALL, "ru");
+
+	TestTDStack();
 
 	cout << endl;
 	system("pause");
+	return 0;
 }

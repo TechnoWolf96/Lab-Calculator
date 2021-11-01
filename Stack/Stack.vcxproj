@@ -24,6 +24,7 @@
     <ProjectGuid>{79a6b6c8-2c23-40f4-a7b8-3a396f18c328}</ProjectGuid>
     <RootNamespace>Stack</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Calculator</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -139,7 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Test_TCalculator.cpp" />
+    <ClCompile Include="Test_TStack.cpp" />
     <ClCompile Include="Test_TDStack.cpp" />
   </ItemGroup>
   <ItemGroup>
