@@ -21,9 +21,8 @@ public:
 	bool Empty();								// Пустой ли стек
 	bool Full();								// Заполнен ли стек
 	void Push(T item);							// Добавить элемент в стек
-	// Извлечь последний элемент из стека
-	T Pop();
-	T Top() { return arr[pos]; }				// Посмотреть последний элемент в стеке
+	T Pop();									// Извлечь последний элемент из стека
+	T Top();									// Посмотреть последний элемент в стеке
 	void Clear() { pos = -1; }					// Очистить стек
 
 	bool operator!=(const TStack<T>& other);		// Операторы сравнения
@@ -81,6 +80,13 @@ inline T TStack<T>::Pop()
 }
 
 template<class T>
+inline T TStack<T>::Top()
+{
+	if (Empty()) throw "Stack is empty";
+	return arr[pos];
+}
+
+template<class T>
 inline TStack<T>& TStack<T>::operator=(const TStack<T>& other)
 {
 	if (size != other.size)
@@ -105,7 +111,7 @@ template<class T>
 inline bool TStack<T>::operator==(const TStack& other)
 {
 	if (pos != other.pos) return false;
-	for (int i = 0; i < pos; i++)
+	for (int i = 0; i <= pos; i++)
 		if (arr[i] != other.arr[i]) return false;
 	return true;
 }

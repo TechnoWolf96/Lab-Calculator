@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "TStack.h"
+#include <math.h>
 
 using namespace std;
 
@@ -9,11 +10,15 @@ class TCalculator
 private:
 	string expression;				// Алгебраическое выражение
 	string postfix;					// Постфиксная запись выражения
-	TStack<char> charStack;			// Стек для скобок (Для проверки корректности выражения)
-	TStack<double> numberStack;		// Стек с посфиксной записью
+	TStack<char> charStack;			// Стек для формирования постфиксной записи
+	TStack<double> numberStack;		// Стек с постфиксной записью
 
-	const string operators = "+-/*";			// Строка со всевозможными операторами
-	bool CheckOperator(char _operator);			// Функция проверяет, есть ли в константной строке с операторами переданный оператор
+	void ToPostfix();
+	int Priority(char oper);
+	bool CheckExpression();
+
+	const string operators = "+-/*^";			// Строка со всевозможными операторами
+	bool IsOperator(char symbol);			// Функция проверяет, есть ли оператором переданный символ
 
 public:
 
@@ -23,33 +28,26 @@ public:
 	TCalculator& operator=(const TCalculator& other);	// Присваивание
 	void Set(string expression);						// Сеттер
 	string Get() { return expression; }					// Геттер
-
-
-	bool CheckExpression();
-	double Calculate();
-
+	string GetPostfix() { return postfix; }				// Получить постфиксную запись
 	
-
+	double Calculate();
 };
-
-
-inline bool TCalculator::CheckOperator(char _operator)
+inline bool TCalculator::IsOperator(char symbol)
 {
 	for (int i = 0; i < operators.length(); i++)
 	{
-		if (_operator == operators[i]) return true;
+		if (symbol == operators[i]) return true;
 	}
 	return false;
 }
 
+
 inline TCalculator::TCalculator(string expression)
 {
-	this->postfix = expression;
+	this->expression = expression;
+	charStack = TStack<char>(expression.size());
 	if (!CheckExpression()) throw "Wrong expression";
-
-	/*
-	* Написать реализацию постфиксного выражения
-	*/
+	ToPostfix();
 	
 }
 
@@ -96,29 +94,60 @@ inline double TCalculator::Calculate()
 {
 	for (int i = 0; i < postfix.length(); i++)
 	{
-		if (isdigit(postfix[i]))					// Если в постфиксной записи попалось число то
+		if (isdigit(postfix[i])) // Если в постфиксной записи попалось число то:
 		{
 			char a[1]; a[0] = postfix[i];
 			numberStack.Push(atof(a));	// Добавляем его в стек с числами
 			continue;	
 		}
 			
-		if (CheckOperator(postfix[i]))	// Встретился знак - нужно произвести данную операцию над двумя последними в стеке числами
+		if (IsOperator(postfix[i]))	// Встретился знак - нужно произвести данную операцию над двумя последними в стеке числами
 		{
 			double second = numberStack.Pop();
 			double first = numberStack.Pop();
 			switch (postfix[i])
 			{
 			case '+': numberStack.Push(first + second); break;
-
 			case '-': numberStack.Push(first - second); break;
-
 			case '*': numberStack.Push(first * second); break;
-
 			case '/': numberStack.Push(first / second); break;
-
+			case '^': numberStack.Push(pow(first, second)); break;
 			}
 		}
 	}
 	return numberStack.Pop();
+}
+
+inline void TCalculator::ToPostfix()
+{
+	string infix = "(" + expression + ")";
+	postfix = "";
+	for (int i = 0; i < infix.size(); i++)
+	{
+		if (isdigit(infix[i])) postfix = postfix + infix[i] + ' ';
+		if (infix[i] == '(') charStack.Push(infix[i]);
+		if (infix[i] == ')')
+		{
+			while (charStack.Top() != '(')
+				postfix = postfix + charStack.Pop() + ' ';
+			charStack.Pop();
+		}
+		if (IsOperator(infix[i]))
+		{
+			while (Priority(infix[i]) <= Priority(charStack.Top()))
+			{
+				postfix = postfix + charStack.Pop() + ' ';
+			}
+			charStack.Push(infix[i]);
+		}
+
+	}
+
+}
+inline int TCalculator::Priority(char oper)
+{
+	if (oper == '(') return 0;
+	if (oper == '+' || oper == '-') return 1;
+	if (oper == '*' || oper == '/') return 2;
+	if (oper == '^') return 3;
 }

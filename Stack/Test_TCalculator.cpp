@@ -4,12 +4,13 @@ using namespace std;
 
 void TestTCalculator()
 {
-    TCalculator a("67*");
-    cout << a.Calculate();
+    TCalculator a("5*9/8^(4-2)+(9-8)/5*2");
+    cout << "Postfix: " << a.GetPostfix() << endl;
+    cout << "Result: " << a.Calculate() << endl;
 }
 
 
-int main()
+int main3()
 {
     setlocale(LC_ALL, "ru");
 
@@ -17,5 +18,5 @@ int main()
 
     cout << endl;
     system("pause");
-
+    return 0;
 }

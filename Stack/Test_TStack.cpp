@@ -39,7 +39,7 @@ void TestTStack()
 
 
 
-int _main()
+int main()
 {
     setlocale(LC_ALL, "ru");
 
