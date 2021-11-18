@@ -1,8 +1,9 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: промежуточный каталог (Debug\) содержит файлы, которые используются совместно с другим проектом (Stack.vcxproj).  Это может привести к ошибкам очистки и перестроения.
-  GTest_Calculator.cpp
-C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(37,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(77,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(95,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(125,20): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(153): warning C4715: TCalculator::Priority: значение возвращается не при всех путях выполнения
+﻿  GTest_Calculator.cpp
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(40,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(91,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(109,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(140,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(197,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(203,61): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\valya\source\repos\Stack\Stack\TCalculator.h(235): warning C4715: TCalculator::Priority: значение возвращается не при всех путях выполнения
   GoogleTest.vcxproj -> C:\Users\valya\source\repos\Stack\Debug\GoogleTest.exe
