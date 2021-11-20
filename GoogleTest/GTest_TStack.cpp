@@ -77,7 +77,7 @@ TEST(TStack, Check_counter)
 	a.Push(1); a.Push(2); a.Push(3);
 	EXPECT_EQ(3, a.Count());
 }
-TEST(TStack, Stack_is_empty_when_worked_clear)
+TEST(TStack, Stack_become_empty_when_worked_clear)
 {
 	TStack<int> a(5);
 	a.Push(1); a.Push(2); a.Push(3);

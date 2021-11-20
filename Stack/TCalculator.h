@@ -2,7 +2,7 @@
 #include <string>
 #include "TStack.h"
 #include <math.h>
-#define VIRGULE ','		// Какой символ является запятой-разделителем целой и дробной части вещественных чисел
+#define VIRGULE '.'		// Какой символ является запятой-разделителем целой и дробной части вещественных чисел
 
 using namespace std;
 
@@ -13,7 +13,9 @@ private:
 	string postfix;					// Постфиксная запись выражения
 	TStack<double> numberStack;		// Стек с числами
 	TStack<char> operatorStack;		// Стек с операторами и скобками
+
 	const string operators = "+-/*^";		// Строка со всевозможными операторами
+
 
 	void ToPostfix();				// Сохраняет постфиксную запись в строку postfix
 	int Priority(char oper);		// Возвращает приоритет операции
@@ -74,10 +76,8 @@ inline TCalculator& TCalculator::operator=(const TCalculator& other)
 {
 	expression = other.expression;
 	postfix = other.postfix;
-	numberStack.~TStack();
-	operatorStack.~TStack();
-	numberStack = TStack<double>(other.expression.size());
-	operatorStack = TStack<char>(other.expression.size());
+	numberStack = other.numberStack;
+	operatorStack = other.operatorStack;
 }
 
 inline void TCalculator::SetExpression(string expression)
@@ -94,6 +94,32 @@ inline void TCalculator::SetExpression(string expression)
 inline bool TCalculator::CheckExpression()
 {
 	ClearStacks();
+
+	// Проверяем что выражение - это последовательность: число, операция, число, операция и т.д (Скобки игнорируем)
+	for (int i = 0; i < expression.size(); i++)
+	{
+		if (!isdigit(expression[i]) && !IsOperator(expression[i]) && expression[i] != '('
+			&& expression[i] != ')' && expression[i] != ' ') return false;
+		if (isdigit(expression[i]))
+		{
+			size_t addIndex;
+			operatorStack.Push('n');
+			stod(&expression[i], &addIndex);
+			if (operatorStack.Count() > 1)
+				return false;
+			i += addIndex;
+		}
+		
+		if (IsOperator(expression[i]))
+		{
+			try { operatorStack.Pop(); }
+			catch (...) { return false; }
+		}
+		if (operatorStack.Count() > 1)
+			return false;
+	}
+	ClearStacks();
+	// Проверка правильности расстановки скобок
 	for (int i = 0; i < expression.size(); i++)
 	{
 		if (expression[i] == '(') operatorStack.Push('(');
@@ -158,9 +184,8 @@ inline double TCalculator::Calculate()
 			
 		if (IsOperator(infix[i]))	// Встретился оператор
 		{
-			if (Priority(infix[i]) > Priority(operatorStack.Top()))	// Попалась более приоритетная операция - кладем в стек с операторами
-				operatorStack.Push(infix[i]);
-			else // Попалась менее/равноприоритеная операция - выполняем ту, что на вершине стека и кладем в стек новую операцию
+			// Попалась менее/равноприоритеная операция - выполняем ту, что на вершине стека
+			while (Priority(infix[i]) <= Priority(operatorStack.Top())) 
 			{
 				double second = numberStack.Pop();
 				double first = numberStack.Pop();
@@ -172,8 +197,9 @@ inline double TCalculator::Calculate()
 				case '/': numberStack.Push(first / second); break;
 				case '^': numberStack.Push(pow(first, second)); break;
 				}
-				operatorStack.Push(infix[i]);
 			}
+			// И кладем в стек новую операцию
+			operatorStack.Push(infix[i]);
 		}
 		if (infix[i] == ')')	// Встретилась закрывающая скобка - выполняем операции в стеке до открывающей скобки
 		{

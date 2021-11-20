@@ -4,8 +4,9 @@ using namespace std;
 
 void TestTCalculator()
 {
-    TCalculator a("2+4^9*9-7/2+3");
+    TCalculator a("5a+24");
     cout << "Postfix: " << a.GetPostfix() << endl;
+    double b = 1e-3;
     double res1 = a.Calculate();
     double res = a.CalculatePostfix();
     bool r = abs(-83.535 - a.CalculatePostfix()) < 10e-9;
@@ -16,7 +17,7 @@ void TestTCalculator()
 
 int main()
 {
-    setlocale(LC_ALL, "ru");
+    setlocale(LC_ALL, "eng");
     TestTCalculator();
 
     cout << endl;
