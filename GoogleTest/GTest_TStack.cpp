@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../Stack/TStack.h"
+#include "../Stack/TCalculator.h"
 
 TEST(TStack, Can_create_stack_witn_positive_size)
 {

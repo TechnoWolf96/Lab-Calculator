@@ -4,10 +4,10 @@ using namespace std;
 
 void TestTCalculator()
 {
-    TCalculator a("5,59-9,2*(4,12/3,2+8,4)");
+    TCalculator a("2+4^9*9-7/2+3");
     cout << "Postfix: " << a.GetPostfix() << endl;
-    double res1 = a.CalculatePostfix();
-    double res = abs(-83.535 - a.CalculatePostfix());
+    double res1 = a.Calculate();
+    double res = a.CalculatePostfix();
     bool r = abs(-83.535 - a.CalculatePostfix()) < 10e-9;
     cout << "Result Postfix: " << a.CalculatePostfix() << endl;
     cout << "Result: " << a.Calculate() << endl;
