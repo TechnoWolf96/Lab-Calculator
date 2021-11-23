@@ -1,1 +1,3 @@
 C:\Users\valya\source\repos\Stack\CalculatorForm\Debug\CalculatorForm.vcxproj.AssemblyReference.cache
+C:\Users\valya\source\repos\Stack\CalculatorForm\Debug\CalculatorForm.CForm.resources
+C:\Users\valya\source\repos\Stack\CalculatorForm\Debug\CalculatorForm.vcxproj.GenerateResource.cache
